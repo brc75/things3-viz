@@ -1,0 +1,8 @@
+{
+  "name": "boilerplate-app",
+  "version": "0.0.1",
+  "dependencies": {},
+  "scripts": {
+    "website": "node src/app/website.js"
+  }
+}
