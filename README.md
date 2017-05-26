@@ -28,3 +28,4 @@ Not included to dependencies in `package.json` by default:
 * `moment` and `moment-timezone`
 * `got` or `request`, sometimes `throttled-request`
 * `uuid`
+* `xlsx`
