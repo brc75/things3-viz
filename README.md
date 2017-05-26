@@ -4,8 +4,7 @@ A boilerplate code to save time making a new Node.js app.
 
 To make a new app:
 
-* Clone this repo
-* Rename the folder
+* Clone this repo with `git clone https://github.com/igorlukanin/boilerplate-app.git <folder>`
 * Install default packages: `npm install --save bluebird compression config ect express rethinkdb`
 * Change files
 * Run the app: `npm run website`
