@@ -29,3 +29,4 @@ Not included to dependencies in `package.json` by default:
 * `got` or `request`, sometimes `throttled-request`
 * `uuid`
 * `xlsx`
+* `glob`
