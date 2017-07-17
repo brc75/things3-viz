@@ -7,7 +7,7 @@ To make a new app:
 * Clone this repo with `git clone https://github.com/igorlukanin/boilerplate-app.git <folder>`
 * Install default packages: `npm install --save bluebird compression config ect express rethinkdb`
 * Change files
-* Run the app: `npm run website` — or better `supervisor -w js,ect -x npm -- run website`
+* Run the app: `npm run website` — or better `supervisor -e js,ect -x npm -- run website`
 
 ## Files to be changed
 
