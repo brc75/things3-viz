@@ -1,15 +1,13 @@
-const compression = require('compression');
-const config = require('config');
-const ect = require('ect');
-const express = require('express');
-
-const db = require('../db');
+const compression = require('compression')
+const config = require('config')
+const ect = require('ect')
+const express = require('express')
 
 
-const port = config.get('website.port');
+const port = config.get('website.port')
 
 
-process.on('unhandledRejection', err => console.error(err));
+process.on('unhandledRejection', err => console.error(err))
 
 
 express()
@@ -25,4 +23,4 @@ express()
         root: `${__dirname}/../../views`
     }).render)
 
-    .listen(port, () => console.info(`Website started at port ${port}`));
+    .listen(port, () => console.info(`Website started at port ${port}`))
