@@ -6,7 +6,8 @@
     "compression": "^1.7.0",
     "config": "^1.26.2",
     "ect": "^0.5.9",
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "sqlite": "^2.8.0"
   },
   "scripts": {
     "website": "node src/app/website.js"

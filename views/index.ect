@@ -1,4 +1,78 @@
-<% extend 'layout.ect' %>
+<!DOCTYPE html>
+<html>
 
-<% block 'title': %><% end %>
+<head>
+    <title>Igor's Tasks</title>
 
+    <meta charset="utf-8">
+
+    <!-- TODO: Mobile-friendly meta tags -->
+    <!-- TODO: Favicons -->
+
+    <link rel="stylesheet" href="/style.css">
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+
+<body>
+    <div class='workspace'>
+        <div class='sidebar'></div>
+        <div class='content'></div>
+    </div>
+
+    <script>
+        d3.json('/data.json', function(data) {
+            const area = d3.select('.sidebar')
+                .selectAll('.area')
+                .data(data)
+                .enter()
+                .append('div')
+                .classed('area', true)
+
+            area.append('div')
+                .classed('area__title', true)
+                .text(function(area) { return area.title })
+                .on('click', function(area) {
+                    selectAreaOrProject(area, d3.select(this))
+                })
+
+            area.each(function(area) {
+                d3.select(this)
+                    .selectAll('.project')
+                    .data(area.projects)
+                    .enter()
+                    .append('div')
+                    .classed('project', true)
+                    .text(function(project) { return project.title })
+                    .on('click', function(project) {
+                        selectAreaOrProject(project, d3.select(this))
+                    })
+            })
+
+            var selectAreaOrProject = function(data, element) {
+                d3.selectAll('.sidebar .selected').classed('selected', false)
+                element.classed('selected', true)
+
+                const content = d3.select('.content')
+                    .html('')
+
+                if (data.tasks !== undefined) {
+                    content.append('div')
+                        .classed('tasks', true)
+                        .selectAll('.task')
+                        .data(data.tasks)
+                        .enter()
+                        .append('div')
+                        .classed('task', true)
+                        .classed('cancelled', function(task) { return task.isCancelled })
+                        .classed('completed', function(task) { return task.isCompleted })
+                        .text(function(task) { return task.title })
+                }
+            }
+        })
+    </script>
+
+    <!-- TODO: Analytics counter -->
+</body>
+
+</html>

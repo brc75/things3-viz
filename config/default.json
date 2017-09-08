@@ -1,4 +1,9 @@
 {
+  "data": {
+    "path": "data/Things.sqlite3",
+    "areaRegex": "Work",
+    "cacheIntervalMs": 300000
+  },
   "website": {
     "port": 5050
   }
