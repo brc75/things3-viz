@@ -3,10 +3,10 @@
     "path": "data/Things.sqlite3",
     "areaRegex": "Work",
     "irrelevantTasksIntervalMs": 864000000,
-    "recentTasksIntervalMs": 432000000,
-    "cacheIntervalMs": 300000
+    "recentTasksIntervalMs": 432000000
   },
   "website": {
-    "port": 5050
+    "port": 5050,
+    "key": ""
   }
 }

@@ -5,6 +5,7 @@ const sqlite = require('sqlite')
 const Promise = require('bluebird')
 
 
+const dataPath = config.get('data.path')
 const areaRegex = new RegExp(config.get('data.areaRegex'))
 const irrelevantTasksTimestamp = (new Date().getTime() - config.get('data.irrelevantTasksIntervalMs')) / 1000
 const recentTasksTimestamp = (new Date().getTime() - config.get('data.recentTasksIntervalMs')) / 1000
@@ -75,13 +76,25 @@ const loadAreas = async db => Promise.all((await db
         tasks: await loadAreaTasks(db, area.uuid)
     })))
 
+const checkData = async db => Promise.all((await db
+    .all(`SELECT * FROM TMArea`))
+    .length > 0)
+
 const load = async () => {
-    const db = await sqlite.open(config.get('data.path'))
-    const updateDate = moment(fs.statSync(config.get('data.path')).mtime).format('DD.MM.YYYY')
+    try {
+        const db = await sqlite.open(dataPath)
+        const updateDate = moment(fs.statSync(dataPath).mtime).format('DD.MM.YYYY HH:mm')
     
-    return {
-        areas: await loadAreas(db),
-        updateDate
+        return {
+            areas: await loadAreas(db),
+            updateDate
+        }
+    }
+    catch (e) {
+        return {
+            areas: [],
+            updateDate: 'ERROR'
+        }
     }
 }
 
