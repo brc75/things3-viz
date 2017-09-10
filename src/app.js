@@ -5,7 +5,7 @@ const express = require('express')
 const fs = require('fs')
 const multer = require('multer')
 
-const data = require('../data')
+const data = require('./data')
 
 
 const port = config.get('website.port')
