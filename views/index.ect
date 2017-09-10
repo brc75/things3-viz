@@ -20,17 +20,31 @@
         <div class='content'></div>
     </div>
 
+    <div class='update-date'></div>
+
     <script>
         d3.json('/data.json', function(data) {
+            d3.select('.update-date')
+                .text(data.updateDate)
+
             const area = d3.select('.sidebar')
                 .selectAll('.area')
-                .data(data)
+                .data(data.areas)
                 .enter()
                 .append('div')
                 .classed('area', true)
 
+            var hasRecent = function(items) {
+                return items.filter(function(item) {
+                    return item.isRecent
+                }).length > 0
+            }
+
             area.append('div')
                 .classed('area__title', true)
+                .classed('recent', function(area) {
+                    return hasRecent(area.tasks)
+                })
                 .text(function(area) { return area.title })
                 .on('click', function(area) {
                     selectAreaOrProject(area, d3.select(this))
@@ -43,6 +57,12 @@
                     .enter()
                     .append('div')
                     .classed('project', true)
+                    .classed('recent', function(project) {
+                        return hasRecent(project.tasks)
+                            || project.sections.reduce(function(flag, section) {
+                                return flag || hasRecent(section.tasks)
+                            }, false)
+                    })
                     .text(function(project) { return project.title })
                     .on('click', function(project) {
                         selectAreaOrProject(project, d3.select(this))
@@ -57,17 +77,35 @@
                     .html('')
 
                 if (data.tasks !== undefined) {
-                    content.append('div')
-                        .classed('tasks', true)
-                        .selectAll('.task')
-                        .data(data.tasks)
-                        .enter()
-                        .append('div')
-                        .classed('task', true)
-                        .classed('cancelled', function(task) { return task.isCancelled })
-                        .classed('completed', function(task) { return task.isCompleted })
-                        .text(function(task) { return task.title })
+                    showTasks(data.tasks, content)
                 }
+
+                if (data.sections !== undefined) {
+                    data.sections.forEach(function(data) {
+                        var section = content.append('div')
+                            .classed('section', true)
+                            
+                        section.append('div')
+                            .classed('section__title', true)
+                            .text(data.title)
+
+                        showTasks(data.tasks, section)
+                    })
+                }
+            }
+
+            var showTasks = function(data, element) {
+                element.append('div')
+                    .classed('tasks', true)
+                    .selectAll('.task')
+                    .data(data)
+                    .enter()
+                    .append('div')
+                    .classed('task', true)
+                    .classed('cancelled', function(task) { return task.isCancelled })
+                    .classed('completed', function(task) { return task.isCompleted })
+                    .classed('recent', function(task) { return task.isRecent })
+                    .text(function(task) { return task.title })
             }
         })
     </script>

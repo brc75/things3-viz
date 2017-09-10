@@ -2,6 +2,8 @@
   "data": {
     "path": "data/Things.sqlite3",
     "areaRegex": "Work",
+    "irrelevantTasksIntervalMs": 864000000,
+    "recentTasksIntervalMs": 432000000,
     "cacheIntervalMs": 300000
   },
   "website": {

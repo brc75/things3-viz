@@ -14,20 +14,31 @@ body {
 
 .sidebar {
     background: rgb(249, 250, 250);
+    box-sizing: border-box;
     padding: 5vw;
     user-select: none;
     -webkit-user-select: none;
-    flex: 0 0 20vw;
+    flex: 0 0 30vw;
     min-height: 100vh;
 }
 
+.update-date {
+    background: rgb(249, 250, 250);
+    color: rgb(130, 135, 141);
+    box-sizing: border-box;
+    padding: 1vw 5vw;
+    user-select: none;
+    -webkit-user-select: none;
+    width: 30vw;
+}
+
 .area {
-    font-weight: 400;
     margin-bottom: 1em;
 }
 
 .area__title {
     cursor: pointer;
+    font-weight: 600;
     padding: 0.1em 0.4em;
 }
 
@@ -44,6 +55,18 @@ body {
 
 .content {
     padding: 5vw;
+    flex: 1 0;
+}
+
+.section {
+    margin-top: 2em;
+}
+
+.section__title {
+    border-bottom: solid 1px rgb(233, 234, 236);
+    font-weight: 600;
+    line-height: 1.75em;
+    margin-bottom: 0.25em;
 }
 
 .tasks {
@@ -51,14 +74,32 @@ body {
 }
 
 .task {
-    line-height: 2em;
+    line-height: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.completed, .cancelled {
+    color: rgb(130, 135, 141);
 }
 
 .cancelled {
-    color: rgb(130, 135, 141);
     text-decoration: line-through;
 }
 
-.completed {
-    color: rgb(130, 135, 141);
+.completed:before, .cancelled:before {
+    display: inline-block;
+    margin-left: -1.25em;
+    width: 1.25em;
+}
+
+.completed:before {
+    content: '✔';
+}
+
+.cancelled:before {
+    content: '✘';
+}
+
+.recent {
+    color: rgb(47, 98, 188);
 }
