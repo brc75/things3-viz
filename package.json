@@ -12,6 +12,6 @@
     "sqlite": "^2.8.0"
   },
   "scripts": {
-    "start": "node src/app.js"
+    "start": "NODE_ENV=production node src/app.js"
   }
 }
